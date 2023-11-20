@@ -31,3 +31,43 @@ if __name__ == "__main__":
     main()
 
 ```
+
+To use online leaderboard microservice:
+
+1. Make sure Flask is installed with: pip install Flask
+2. Make sure Flask-SQLAlchemy is installed with: pip install Flask-SQLAlchemy
+3. Add the provided leaderboardManager.cs file to the scripts folder
+4. Make the provided modifications to the LogicScript.cs file in the scripts folder
+5. Run the provided app.py file to start the server.
+
+Example code for using microservice:
+```
+public class YourScript : MonoBehaviour
+{
+    private LeaderboardManager leaderboardManager;
+
+    private void Start()
+    {
+        leaderboardManager = GetComponent<LeaderboardManager>();
+
+        // Example: Get Leaderboard
+        leaderboardManager.GetLeaderboard((response) =>
+        {
+            Debug.Log("Leaderboard Response: " + response);
+            // Process the leaderboard data as needed
+        });
+
+        // Example: Add Score
+        string playerName = "Player123";
+        int score = 150;
+
+        leaderboardManager.AddScore(playerName, score, (response) =>
+        {
+            Debug.Log("Add Score Response: " + response);
+            // Process the response after adding the score
+        });
+    }
+}
+```
+UML Sequence Diagram:
+![cs361_UML](https://github.com/KaiSpellman/cs361/assets/128665815/f021bbfc-a0dc-4612-aa06-d7d5348c981e)
